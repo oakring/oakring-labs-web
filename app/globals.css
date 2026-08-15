@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+:root {
+  /* Warm oak — lightest workable shade; body text tuned for WCAG AA */
+  --color-background: #fbf7f0;
+  --color-foreground: #1c1917;
+  --color-muted: #f3ebe0;
+  --color-muted-foreground: #44403c; /* stone-700 — ≥4.5:1 on cream */
+  --color-border: #e7ddd0;
+  --color-accent: #292524;
+  --color-accent-foreground: #fafaf9;
+  --color-ring: #78716c;
+  --color-surface: #fffdf9;
+  --section-py: 5.5rem;
+  --section-py-sm: 3.5rem;
+}
+
+@theme inline {
+  /* Fonts come from next/font CSS variables on <html>:
+     --font-display, --font-body, --font-mono */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  color: var(--color-foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  background-color: var(--color-background);
+  background-image: linear-gradient(
+    165deg,
+    #fcf9f4 0%,
+    #fbf7f0 45%,
+    #f6f0e6 100%
+  );
+  background-attachment: fixed;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+::selection {
+  background-color: color-mix(in srgb, #b45309 18%, transparent);
+  color: var(--color-foreground);
+}
+
+/* Light, fast fades — CSS only */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-up 0.55s ease-out both;
+}
+
+.fade-in-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.fade-in-delay-3 {
+  animation-delay: 0.24s;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: fade-up 0.6s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+/* Knowledge-graph idle motion (cheap CSS transforms) */
+@keyframes kg-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(2px, -3px);
+  }
+}
+
+@keyframes kg-drift-slow {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+@keyframes kg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@keyframes kg-pulse-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.15;
+  }
+}
+
+.kg-drift {
+  animation: kg-drift 7s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.kg-drift-slow {
+  animation: kg-drift-slow 9s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.kg-pulse {
+  animation: kg-pulse 3.2s ease-in-out infinite;
+}
+
+.kg-pulse-ring {
+  animation: kg-pulse-ring 3.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .fade-in-delay-1,
+  .fade-in-delay-2,
+  .fade-in-delay-3,
+  .reveal,
+  .kg-drift,
+  .kg-drift-slow,
+  .kg-pulse,
+  .kg-pulse-ring {
+    animation: none;
+  }
+}
