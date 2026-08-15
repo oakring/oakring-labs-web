@@ -7,7 +7,6 @@ import { notifyFounderNewWaitlistSignup } from "@/lib/notify";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { waitlistRepository } from "@/lib/waitlist-repository.prisma";
 import {
-  initialWaitlistState,
   waitlistSchema,
   type WaitlistActionState,
 } from "@/components/waitlist/waitlist.schema";
@@ -88,5 +87,3 @@ export async function joinWaitlist(
     kind: "created",
   };
 }
-
-export { initialWaitlistState };

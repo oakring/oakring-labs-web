@@ -2,14 +2,12 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import {
+  initialWaitlistState,
   validateWaitlistField,
   waitlistSchema,
 } from "@/components/waitlist/waitlist.schema";
 import { waitlist } from "@/lib/content";
-import {
-  initialWaitlistState,
-  joinWaitlist,
-} from "@/lib/actions/waitlist";
+import { joinWaitlist } from "@/lib/actions/waitlist";
 import { trackWaitlistSubmitted } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
